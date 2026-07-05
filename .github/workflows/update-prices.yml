@@ -24,11 +24,14 @@ jobs:
       - name: Run scrapers
         run: python scrapers/run_all.py
 
+      - name: Build GPU pages + sitemap
+        run: python scrapers/build_site.py
+
       - name: Commit updated data
         run: |
           git config user.name "price-bot"
           git config user.email "actions@github.com"
-          git add site/data/gpus.json site/data/history.json
+          git add site
           git diff --cached --quiet && echo "No price changes" && exit 0
           git commit -m "prices: $(date -u +%F' '%H:%M) UTC"
           git push
