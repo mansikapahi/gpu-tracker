@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPU Floor — live cloud GPU price index</title>
+<meta name="description" content="Live comparison of cloud GPU prices. Cheapest H100, H200, A100 and RTX 4090 hourly rates across RunPod, Vast.ai and Lambda, updated daily.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16191d; --muted:#6b7480; --paper:#f2f4f5; --card:#ffffff;
+    --line:#e0e4e8; --floor:#76b900; --floor-ink:#3d6000; --amber:#c97a00;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --disp:"Space Grotesk",system-ui,sans-serif;
+    --sans:system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5}
+  a{color:inherit}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+
+  header{padding:28px 0 18px}
+  .brand{font-family:var(--disp);font-weight:700;font-size:1.35rem;letter-spacing:-.02em}
+  .brand .tick{color:var(--floor-ink)}
+  .stamp{font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:4px}
+  .stamp .stale{color:var(--amber)}
+
+  /* Signature: floor-price ticker */
+  .ticker{display:flex;gap:0;overflow-x:auto;border:1px solid var(--line);
+    border-radius:10px;background:var(--card);scrollbar-width:none}
+  .ticker::-webkit-scrollbar{display:none}
+  .tick-item{flex:1 0 auto;min-width:150px;padding:14px 18px;border-right:1px solid var(--line)}
+  .tick-item:last-child{border-right:0}
+  .tick-item .m{font-family:var(--disp);font-weight:500;font-size:.85rem}
+  .tick-item .p{font-family:var(--mono);font-weight:600;font-size:1.25rem;margin-top:2px}
+  .tick-item .pr{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+  .tick-item .p small{font-size:.7rem;color:var(--muted);font-weight:400}
+
+  .spark{color:var(--muted);opacity:.85;vertical-align:middle}
+  .hright{display:flex;align-items:center;gap:12px}
+  .d{margin-left:6px;font-size:.68rem;padding:1px 5px;border-radius:99px}
+  .d.down{background:#eef7e0;color:var(--floor-ink)}
+  .d.up{background:#fdf1e0;color:var(--amber)}
+  .adslot{margin:20px 0;border:1px dashed var(--line);border-radius:10px;
+    min-height:90px;display:flex;align-items:center;justify-content:center;
+    color:var(--muted);font-family:var(--mono);font-size:.75rem;background:var(--card)}
+
+  .filters{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 16px}
+  .filters select,.filters input{font-family:var(--mono);font-size:.85rem;padding:8px 10px;
+    border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+  .filters input{flex:1;min-width:160px}
+  select:focus,input:focus,button:focus{outline:2px solid var(--floor-ink);outline-offset:1px}
+
+  .group{background:var(--card);border:1px solid var(--line);border-radius:10px;
+    margin-bottom:16px;overflow:hidden}
+  .group h2{font-family:var(--disp);font-size:1rem;font-weight:700;padding:12px 16px;
+    border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline}
+  .group h2 .vram{font-family:var(--mono);font-weight:400;font-size:.72rem;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th{font-family:var(--mono);font-weight:400;font-size:.7rem;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--muted);text-align:left;padding:8px 16px;
+    border-bottom:1px solid var(--line)}
+  td{padding:10px 16px;border-bottom:1px solid var(--line)}
+  tr:last-child td{border-bottom:0}
+  td.price{font-family:var(--mono);font-weight:600;white-space:nowrap}
+  td.kind,td.region{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+  tr.floor td.price{color:var(--floor-ink)}
+  tr.floor td.price::after{content:"floor";margin-left:8px;font-size:.62rem;font-weight:600;
+    background:var(--floor);color:#fff;padding:2px 6px;border-radius:99px;vertical-align:1px}
+  .go{font-family:var(--mono);font-size:.75rem;text-decoration:none;border:1px solid var(--line);
+    padding:5px 10px;border-radius:8px;white-space:nowrap}
+  .go:hover{border-color:var(--floor-ink);color:var(--floor-ink)}
+
+  footer{padding:26px 0 40px;color:var(--muted);font-size:.78rem}
+  footer p{max-width:64ch}
+  .empty{padding:40px;text-align:center;color:var(--muted);font-family:var(--mono);font-size:.85rem}
+
+  @media (max-width:640px){
+    th:nth-child(4),td:nth-child(4){display:none}
+    .tick-item{min-width:128px;padding:12px 14px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .tick-item .p{transition:color .2s}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">GPU<span class="tick">/</span>Floor</div>
+    <div class="stamp" id="stamp">loading…</div>
+  </header>
+
+  <div class="ticker" id="ticker" aria-label="Lowest price per GPU model"></div>
+
+  <!-- AD SLOT: leaderboard. Replace with your AdSense unit once approved. -->
+  <div class="adslot" id="ad-top">ad slot · 728×90</div>
+
+  <div class="filters">
+    <input id="q" type="search" placeholder="filter: h100, 4090…" aria-label="Filter GPU model">
+    <select id="provider" aria-label="Provider">
+      <option value="">all providers</option>
+    </select>
+    <select id="kind" aria-label="Offer type">
+      <option value="">all offer types</option>
+      <option value="on-demand">on-demand</option>
+      <option value="community">community / spot</option>
+    </select>
+  </div>
+
+  <main id="groups"></main>
+
+  <footer>
+    <p>Prices are on-demand hourly rates per single GPU in USD, collected automatically
+    from each provider's public pricing. Always confirm on the provider's site before
+    committing — availability and regional pricing vary. Some links are referral links,
+    which fund this site at no cost to you.</p>
+  </footer>
+</div>
+
+<script>
+const FALLBACK = null;   // preview builds may embed data here
+const HFALLBACK = null; // populated by build with sample data if fetch fails
+const ORDER = ["B200","H200","H100 SXM","H100 PCIe","A100 80GB","A100 40GB",
+               "L40S","RTX 6000 Ada","RTX A6000","RTX 5090","RTX 4090"];
+let DATA = null;
+let HIST = null;
+
+async function load(){
+  try{
+    const r = await fetch("data/gpus.json",{cache:"no-store"});
+    if(!r.ok) throw new Error(r.status);
+    DATA = await r.json();
+  }catch(e){
+    DATA = FALLBACK;
+  }
+  try{
+    const h = await fetch("data/history.json",{cache:"no-store"});
+    HIST = h.ok ? await h.json() : HFALLBACK;
+  }catch(e){ HIST = HFALLBACK; }
+  if(!DATA){ document.getElementById("groups").innerHTML =
+    '<div class="empty">No price data yet. Run <b>python scrapers/run_all.py --sample</b> to generate it.</div>'; return; }
+  init();
+}
+
+function init(){
+  const d = new Date(DATA.generated_at);
+  const stale = Object.keys(DATA.errors||{});
+  document.getElementById("stamp").innerHTML =
+    "updated " + d.toISOString().slice(0,16).replace("T"," ") + " UTC · " +
+    DATA.offer_count + " offers" +
+    (stale.length ? ' · <span class="stale">stale: '+stale.join(", ")+"</span>" : "");
+  const provs = [...new Set(DATA.offers.map(o=>o.provider))].sort();
+  const sel = document.getElementById("provider");
+  provs.forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=p.toLowerCase();sel.append(o);});
+  ["q","provider","kind"].forEach(id=>document.getElementById(id).addEventListener("input",render));
+  render();
+}
+
+function fmt(p){ return "$"+p.toFixed(2); }
+
+function series(model, prov){
+  if(!HIST) return [];
+  const days = Object.keys(HIST.days).sort();
+  return days.map(d=>{
+    const snap = HIST.days[d];
+    let min = null;
+    for(const k in snap){
+      const [slug, m] = k.split("|");
+      if(m!==model) continue;
+      if(prov && slug!==provSlug(prov)) continue;
+      if(min===null || snap[k]<min) min = snap[k];
+    }
+    return min;
+  }).filter(v=>v!==null);
+}
+function provSlug(name){
+  const o = DATA.offers.find(o=>o.provider===name);
+  return o ? o.provider_slug : name.toLowerCase();
+}
+function spark(vals, w=110, h=26){
+  if(vals.length<2) return "";
+  const min=Math.min(...vals), max=Math.max(...vals), span=(max-min)||1;
+  const pts = vals.map((v,i)=>
+    (i/(vals.length-1)*w).toFixed(1)+","+(h-2-((v-min)/span)*(h-4)).toFixed(1)).join(" ");
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true">
+    <polyline points="${pts}" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
+}
+function delta7(vals){
+  if(vals.length<8) return null;
+  const now=vals[vals.length-1], then=vals[vals.length-8];
+  return (now-then)/then*100;
+}
+
+function render(){
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const prov = document.getElementById("provider").value;
+  const kind = document.getElementById("kind").value;
+  const offers = DATA.offers.filter(o=>
+    (!q || o.gpu_model.toLowerCase().includes(q)) &&
+    (!prov || o.provider===prov) &&
+    (!kind || (kind==="community" ? o.kind!=="on-demand" : o.kind===kind)));
+
+  // ticker: floor price per model (unfiltered by search, filtered by provider/kind)
+  const tickerBase = DATA.offers.filter(o=>(!prov||o.provider===prov)&&(!kind||(kind==="community"?o.kind!=="on-demand":o.kind===kind)));
+  const floors = {};
+  tickerBase.forEach(o=>{ if(!(o.gpu_model in floors)||o.price_hour_usd<floors[o.gpu_model].price_hour_usd) floors[o.gpu_model]=o; });
+  document.getElementById("ticker").innerHTML = ORDER.filter(m=>floors[m]).map(m=>{
+    const o=floors[m];
+    const dd = delta7(series(m, prov||null));
+    const dHtml = dd===null ? "" :
+      `<span class="d ${dd<=0?"down":"up"}">${dd>0?"+":""}${dd.toFixed(1)}% 7d</span>`;
+    return `<div class="tick-item"><div class="m">${m}</div>
+      <div class="p">${fmt(o.price_hour_usd)}<small>/hr</small></div>
+      <div class="pr">${o.provider.toLowerCase()} ${dHtml}</div></div>`;
+  }).join("");
+
+  // grouped tables
+  const groups = {};
+  offers.forEach(o=>{(groups[o.gpu_model] ||= []).push(o);});
+  const html = ORDER.filter(m=>groups[m]).map(m=>{
+    const rows = groups[m].sort((a,b)=>a.price_hour_usd-b.price_hour_usd);
+    const floor = rows[0].price_hour_usd;
+    const sp = spark(series(m, prov||null));
+    return `<section class="group"><h2>${m}
+        <span class="hright">${sp}<span class="vram">${rows[0].vram_gb ? rows[0].vram_gb+" GB VRAM" : ""}</span></span></h2>
+      <table><thead><tr><th>provider</th><th>$/gpu/hr</th><th>type</th><th>region</th><th></th></tr></thead>
+      <tbody>${rows.map(o=>`
+        <tr class="${o.price_hour_usd===floor?"floor":""}">
+          <td>${o.provider}</td>
+          <td class="price">${fmt(o.price_hour_usd)}</td>
+          <td class="kind">${o.kind}</td>
+          <td class="region">${o.region||"—"}</td>
+          <td><a class="go" href="${o.affiliate_url||o.source_url}" rel="sponsored noopener" target="_blank">view →</a></td>
+        </tr>`).join("")}
+      </tbody></table></section>`;
+  }).join("");
+  document.getElementById("groups").innerHTML =
+    html || '<div class="empty">nothing matches that filter</div>';
+}
+
+load();
+</script>
+</body>
+</html>
