@@ -13,13 +13,13 @@ import requests
 
 from common import Offer, canonical_model
 
-HEADERS = {"User-Agent": "gpu-price-tracker/0.1 (contact: you@yourdomain.example)"}
+HEADERS = {"User-Agent": "gpu-price-tracker/0.1 (contact: gpufloor.com)"}
 TIMEOUT = 30
 
 # Put your referral links here once you're accepted into partner programmes.
 AFFILIATE = {
-    "runpod": None,   # e.g. "https://runpod.io?ref=XXXX"
-    "vastai": None,
+    "runpod": "https://runpod.io?ref=6vbvms6s",   # e.g. "https://runpod.io?ref=XXXX"
+    "vastai": "https://cloud.vast.ai/?ref_id=606541",
     "lambda": None,
 }
 
