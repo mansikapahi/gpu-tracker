@@ -29,10 +29,10 @@
   .stamp .stale{color:var(--amber)}
 
   /* Signature: floor-price ticker */
-  .ticker{display:flex;gap:0;overflow-x:auto;border:1px solid var(--line);
+  .ticker{display:flex;gap:0;overflow-x:auto;border:1px solid var(--line);min-height:100px;
     border-radius:10px;background:var(--card);scrollbar-width:none}
   .ticker::-webkit-scrollbar{display:none}
-  .tick-item{flex:1 0 auto;min-width:150px;padding:14px 18px;border-right:1px solid var(--line)}
+  .tick-item{flex:1 0 auto;min-width:150px;padding:14px 18px;min-height:100px;border-right:1px solid var(--line)}
   .tick-item:last-child{border-right:0}
   .tick-item .m{font-family:var(--disp);font-weight:500;font-size:.85rem}
   .tick-item .p{font-family:var(--mono);font-weight:600;font-size:1.25rem;margin-top:2px}
@@ -112,7 +112,7 @@
     </select>
   </div>
 
-  <main id="groups"></main>
+  <main id="groups" style="min-height:70vh"></main>
 
   <nav style="margin:26px 0 0;line-height:2.2">
     <a href="/b200/" class="go">B200</a> <a href="/h200/" class="go">H200</a>
