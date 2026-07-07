@@ -74,6 +74,34 @@ def sample_history(offers: list[Offer], days: int = 90) -> None:
         update_history(snapshot, today=day)
 
 
+
+
+def sanity_filter(offers: list[Offer]) -> list[Offer]:
+    """Drop implausibly cheap offers (glitched marketplace listings).
+
+    Rule: within each GPU model, any offer priced below 35% of the model's
+    cheapest ON-DEMAND price is considered a data glitch and dropped.
+    Community/spot offers are legitimately cheaper, but a 141GB H200 at
+    $0.50/hr next to a $2.29 on-demand floor is a broken listing, not a deal.
+    Models with no on-demand reference are left untouched.
+    """
+    floor_od: dict[str, float] = {}
+    for o in offers:
+        if o.kind == "on-demand":
+            if o.gpu_model not in floor_od or o.price_hour_usd < floor_od[o.gpu_model]:
+                floor_od[o.gpu_model] = o.price_hour_usd
+
+    kept: list[Offer] = []
+    for o in offers:
+        ref = floor_od.get(o.gpu_model)
+        if ref and o.price_hour_usd < 0.35 * ref:
+            print(f"[sanity] dropped {o.provider} {o.gpu_model} "
+                  f"${o.price_hour_usd}/hr (< 35% of ${ref} on-demand floor)")
+            continue
+        kept.append(o)
+    return kept
+
+
 def main() -> int:
     if "--sample" in sys.argv:
         offers = sample_offers()
@@ -96,7 +124,7 @@ def main() -> int:
         print("All providers failed; keeping previous data file.", file=sys.stderr)
         return 1
 
-    offers = backfill_vram(offers)
+    offers = sanity_filter(backfill_vram(offers))
     write_output(offers, errors)
     update_history(offers)
     return 0
