@@ -36,6 +36,8 @@ def canonical_model(raw: str) -> str | None:
     Returns None for models we don't track (keeps the dataset focused).
     """
     label = raw.lower()
+    if re.search(r"gh200", label):
+        return None  # GH200 (Grace Hopper, 96GB) is a different product, not an H200
     for pattern, name in CANONICAL_MODELS.items():
         if re.search(pattern, label):
             return name
