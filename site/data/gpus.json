@@ -1,7 +1,9 @@
 {
-  "generated_at": "2026-10-09T11:56:23+00:00",
-  "offer_count": 33,
-  "errors": {},
+  "generated_at": "2026-10-09T21:43:29+00:00",
+  "offer_count": 30,
+  "errors": {
+    "lambda": "404 Client Error: Not Found for url: https://lambda.ai/pricing"
+  },
   "offers": [
     {
       "provider": "RunPod",
@@ -14,7 +16,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -27,7 +29,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -40,7 +42,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -53,7 +55,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -66,7 +68,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -79,7 +81,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -92,7 +94,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -105,7 +107,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -118,7 +120,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -131,7 +133,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -144,7 +146,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -157,7 +159,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -170,7 +172,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -183,7 +185,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -196,7 +198,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -209,7 +211,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -222,7 +224,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -235,7 +237,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -248,7 +250,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -261,7 +263,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -274,7 +276,7 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "RunPod",
@@ -287,72 +289,72 @@
       "region": null,
       "source_url": "https://www.runpod.io/pricing",
       "affiliate_url": "https://runpod.io?ref=6vbvms6s",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:28+00:00"
     },
     {
       "provider": "Vast.ai",
       "provider_slug": "vastai",
       "gpu_model": "RTX 5090",
       "vram_gb": 31,
-      "price_hour_usd": 0.446,
-      "gpu_count": 1,
-      "kind": "on-demand",
-      "region": "California, US",
-      "source_url": "https://vast.ai/pricing",
-      "affiliate_url": "https://cloud.vast.ai/?ref_id=606541",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
-    },
-    {
-      "provider": "Vast.ai",
-      "provider_slug": "vastai",
-      "gpu_model": "RTX 4090",
-      "vram_gb": 23,
-      "price_hour_usd": 0.441,
+      "price_hour_usd": 0.577,
       "gpu_count": 1,
       "kind": "on-demand",
       "region": "Taiwan, TW",
       "source_url": "https://vast.ai/pricing",
       "affiliate_url": "https://cloud.vast.ai/?ref_id=606541",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:29+00:00"
     },
     {
       "provider": "Vast.ai",
       "provider_slug": "vastai",
-      "gpu_model": "H200",
-      "vram_gb": 140,
-      "price_hour_usd": 4.67,
+      "gpu_model": "RTX 4090",
+      "vram_gb": 47,
+      "price_hour_usd": 0.415,
       "gpu_count": 1,
       "kind": "on-demand",
-      "region": "New Mexico, US",
+      "region": "Japan, JP",
       "source_url": "https://vast.ai/pricing",
       "affiliate_url": "https://cloud.vast.ai/?ref_id=606541",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
-    },
-    {
-      "provider": "Vast.ai",
-      "provider_slug": "vastai",
-      "gpu_model": "B200",
-      "vram_gb": 179,
-      "price_hour_usd": 7.501,
-      "gpu_count": 1,
-      "kind": "on-demand",
-      "region": ", US",
-      "source_url": "https://vast.ai/pricing",
-      "affiliate_url": "https://cloud.vast.ai/?ref_id=606541",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:29+00:00"
     },
     {
       "provider": "Vast.ai",
       "provider_slug": "vastai",
       "gpu_model": "RTX 6000 Ada",
       "vram_gb": 47,
-      "price_hour_usd": 0.602,
+      "price_hour_usd": 0.646,
       "gpu_count": 1,
       "kind": "on-demand",
-      "region": "T\u00fcrkiye, TR",
+      "region": "California, US",
       "source_url": "https://vast.ai/pricing",
       "affiliate_url": "https://cloud.vast.ai/?ref_id=606541",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:29+00:00"
+    },
+    {
+      "provider": "Vast.ai",
+      "provider_slug": "vastai",
+      "gpu_model": "H200",
+      "vram_gb": 140,
+      "price_hour_usd": 4.002,
+      "gpu_count": 1,
+      "kind": "on-demand",
+      "region": "Japan, JP",
+      "source_url": "https://vast.ai/pricing",
+      "affiliate_url": "https://cloud.vast.ai/?ref_id=606541",
+      "fetched_at": "2026-10-09T21:43:29+00:00"
+    },
+    {
+      "provider": "Vast.ai",
+      "provider_slug": "vastai",
+      "gpu_model": "H100 SXM",
+      "vram_gb": 93,
+      "price_hour_usd": 2.388,
+      "gpu_count": 1,
+      "kind": "on-demand",
+      "region": "South Korea, KR",
+      "source_url": "https://vast.ai/pricing",
+      "affiliate_url": "https://cloud.vast.ai/?ref_id=606541",
+      "fetched_at": "2026-10-09T21:43:29+00:00"
     },
     {
       "provider": "Vast.ai",
@@ -365,72 +367,33 @@
       "region": "T\u00fcrkiye, TR",
       "source_url": "https://vast.ai/pricing",
       "affiliate_url": "https://cloud.vast.ai/?ref_id=606541",
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "fetched_at": "2026-10-09T21:43:29+00:00"
     },
     {
-      "provider": "Lambda",
-      "provider_slug": "lambda",
+      "provider": "Vast.ai",
+      "provider_slug": "vastai",
       "gpu_model": "B200",
-      "vram_gb": 180,
-      "price_hour_usd": 6.69,
+      "vram_gb": 179,
+      "price_hour_usd": 7.501,
       "gpu_count": 1,
       "kind": "on-demand",
-      "region": null,
-      "source_url": "https://lambda.ai/pricing",
-      "affiliate_url": null,
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "region": ", US",
+      "source_url": "https://vast.ai/pricing",
+      "affiliate_url": "https://cloud.vast.ai/?ref_id=606541",
+      "fetched_at": "2026-10-09T21:43:29+00:00"
     },
     {
-      "provider": "Lambda",
-      "provider_slug": "lambda",
-      "gpu_model": "H100 SXM",
-      "vram_gb": 80,
-      "price_hour_usd": 3.99,
-      "gpu_count": 1,
-      "kind": "on-demand",
-      "region": null,
-      "source_url": "https://lambda.ai/pricing",
-      "affiliate_url": null,
-      "fetched_at": "2026-10-09T11:56:23+00:00"
-    },
-    {
-      "provider": "Lambda",
-      "provider_slug": "lambda",
-      "gpu_model": "A100 80GB",
-      "vram_gb": 80,
-      "price_hour_usd": 2.79,
-      "gpu_count": 1,
-      "kind": "on-demand",
-      "region": null,
-      "source_url": "https://lambda.ai/pricing",
-      "affiliate_url": null,
-      "fetched_at": "2026-10-09T11:56:23+00:00"
-    },
-    {
-      "provider": "Lambda",
-      "provider_slug": "lambda",
-      "gpu_model": "A100 40GB",
-      "vram_gb": 40,
-      "price_hour_usd": 1.99,
-      "gpu_count": 1,
-      "kind": "on-demand",
-      "region": null,
-      "source_url": "https://lambda.ai/pricing",
-      "affiliate_url": null,
-      "fetched_at": "2026-10-09T11:56:23+00:00"
-    },
-    {
-      "provider": "Lambda",
-      "provider_slug": "lambda",
+      "provider": "Vast.ai",
+      "provider_slug": "vastai",
       "gpu_model": "RTX A6000",
-      "vram_gb": 48,
-      "price_hour_usd": 1.09,
+      "vram_gb": 44,
+      "price_hour_usd": 0.404,
       "gpu_count": 1,
       "kind": "on-demand",
-      "region": null,
-      "source_url": "https://lambda.ai/pricing",
-      "affiliate_url": null,
-      "fetched_at": "2026-10-09T11:56:23+00:00"
+      "region": "Delaware, US",
+      "source_url": "https://vast.ai/pricing",
+      "affiliate_url": "https://cloud.vast.ai/?ref_id=606541",
+      "fetched_at": "2026-10-09T21:43:29+00:00"
     }
   ]
 }
