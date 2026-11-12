@@ -9,7 +9,7 @@ and Cloudflare Pages redeploys the static site on every commit.
 ```
 scrapers/
   common.py      shared schema, model-name normalisation, output writer
-  providers.py   one scraper per provider (RunPod, Vast.ai, Lambda)
+  providers.py   one scraper per provider (RunPod, Vast.ai, Lambda, Runcrate)
   run_all.py     runner; --sample writes offline dev data
 site/
   index.html     the whole frontend (no build step)

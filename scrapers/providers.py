@@ -21,6 +21,7 @@ AFFILIATE = {
     "runpod": "https://runpod.io?ref=6vbvms6s",   # e.g. "https://runpod.io?ref=XXXX"
     "vastai": "https://cloud.vast.ai/?ref_id=606541",
     "lambda": None,
+    "runcrate": None,
 }
 
 
@@ -150,6 +151,49 @@ def scrape_lambda() -> list[Offer]:
     return offers
 
 
+# Runcrate feed gpu_type values we map. The feed does not say SXM vs PCIe, so
+# H100 is left out; H200_nvl would also match the H200 pattern, so it is
+# left out too. Types canonical_model() does not track drop out on their own.
+RUNCRATE_TYPES = {
+    "B200", "H200", "A100_80G", "A100", "L40S",
+    "RTX5090", "RTX4090", "RTX6000Ada", "A6000",
+}
+
+
+def scrape_runcrate() -> list[Offer]:
+    """Runcrate (an AI cloud) publishes a public JSON price feed, no key.
+
+    min_price_hr is the live on-demand price per GPU-hour. Types with no live
+    offers (available_options < 1) carry a stale price and are skipped.
+    """
+    resp = requests.get("https://www.runcrate.ai/api/gpu-pricing",
+                        headers=HEADERS, timeout=TIMEOUT)
+    resp.raise_for_status()
+    offers: list[Offer] = []
+    for gpu in resp.json()["gpus"]:
+        if gpu.get("gpu_type") not in RUNCRATE_TYPES:
+            continue
+        price = float(gpu.get("min_price_hr") or 0)
+        if price <= 0 or int(gpu.get("available_options") or 0) < 1:
+            continue
+        model = canonical_model(gpu.get("name") or "")
+        if not model:
+            continue
+        vram = re.match(r"\d+", gpu.get("vram") or "")
+        offers.append(Offer(
+            provider="Runcrate",
+            provider_slug="runcrate",
+            gpu_model=model,
+            vram_gb=int(vram.group()) if vram else 0,
+            price_hour_usd=price,
+            source_url="https://www.runcrate.ai/pricing",
+            affiliate_url=AFFILIATE["runcrate"],
+        ))
+    if not offers:
+        raise RuntimeError("Runcrate feed parsed but no offers matched - shape change?")
+    return offers
+
+
 KNOWN_VRAM = {
     "B200": 192, "H200": 141, "H100 SXM": 80, "H100 PCIe": 80,
     "A100 80GB": 80, "A100 40GB": 40, "L40S": 48, "RTX 6000 Ada": 48,
@@ -168,4 +212,5 @@ SCRAPERS = {
     "runpod": scrape_runpod,
     "vastai": scrape_vastai,
     "lambda": scrape_lambda,
+    "runcrate": scrape_runcrate,
 }
